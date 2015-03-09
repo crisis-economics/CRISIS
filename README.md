@@ -85,6 +85,8 @@ and J. Doyne Farmer.
 
 The CRISIS software comes with a desktop GUI. To run the GUI, run eu.crisis_economics.abm.dashboard.Dashboard.java.
 
+![A CRISIS Diagram](CRISIS/img/DashboardExample.png)
+
 # License
 
 The CRISIS software is released under the GNU General Public License, Version 3, 29 June 2007. 
