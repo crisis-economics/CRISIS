@@ -87,6 +87,8 @@ The CRISIS software comes with a desktop GUI. To run the GUI, run eu.crisis_econ
 
 ![A CRISIS Diagram](CRISIS/img/DashboardExample.png)
 
+It is recommended that CRISIS applications are processed with a maximum Java heap size of <b>at least 8Gb</b>. If your system can utilize an 8Gb heap, this can be specified (at the time of writing) by adding -Xmx8g to the VM argument list.
+
 # License
 
 The CRISIS software is released under the GNU General Public License, Version 3, 29 June 2007. 
