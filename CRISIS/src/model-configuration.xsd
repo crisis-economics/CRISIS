@@ -1,0 +1,233 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema attributeFormDefault="unqualified"
+	elementFormDefault="qualified" version="1.0"
+	xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:jxb="http://java.sun.com/xml/ns/jaxb"
+	jxb:version="2.0" xmlns="http://crisis-economics.eu/model-configuration"
+	targetNamespace="http://crisis-economics.eu/model-configuration">
+
+	<xsd:element name="model">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element type="generalParameter" name="general-parameter" minOccurs="0" maxOccurs="unbounded">
+					<xsd:annotation>
+						<xsd:appinfo>
+							<jxb:property name="GeneralParameterList" />
+						</xsd:appinfo>
+					</xsd:annotation>
+				</xsd:element>
+				<xsd:element type="defaultParameter" name="default-parameter" minOccurs="0" maxOccurs="unbounded">
+					<xsd:annotation>
+						<xsd:appinfo>
+							<jxb:property name="DefaultParameterList" />
+						</xsd:appinfo>
+					</xsd:annotation>
+				</xsd:element>
+				<xsd:element type="parameter" name="parameter" minOccurs="0" maxOccurs="unbounded">
+					<xsd:annotation>
+						<xsd:appinfo>
+							<jxb:property name="ParameterList" />
+						</xsd:appinfo>
+					</xsd:annotation>
+				</xsd:element>
+				<xsd:element type="submodelParameter" name="submodel-parameter"	minOccurs="0" maxOccurs="unbounded">
+					<xsd:annotation>
+						<xsd:appinfo>
+							<jxb:property name="SubmodelParameterList" />
+						</xsd:appinfo>
+					</xsd:annotation>
+				</xsd:element>
+				<xsd:element type="combination" name="combination" minOccurs="0" maxOccurs="unbounded" />
+				<xsd:element type="selector" name="selector" minOccurs="0" maxOccurs="unbounded">
+					<xsd:annotation>
+						<xsd:appinfo>
+							<jxb:property name="SelectorList" />
+						</xsd:appinfo>
+					</xsd:annotation>
+				</xsd:element>
+				<xsd:element type="operator" name="operator" minOccurs="0" maxOccurs="unbounded">
+					<xsd:annotation>
+						<xsd:appinfo>
+							<jxb:property name="OperatorList" />
+						</xsd:appinfo>
+					</xsd:annotation>
+				</xsd:element>
+				<xsd:element type="chromosome" name="chromosome" minOccurs="0" maxOccurs="1" />
+			</xsd:sequence>
+			<xsd:attribute type="xsd:string" name="class" use="required" />
+			<xsd:attribute type="modelType" name="run-strategy"	default="single" />
+			<xsd:attribute type="xsd:int" name="number-of-runs"/>
+		</xsd:complexType>
+	</xsd:element>
+
+	<xsd:complexType name="generalParameter">
+		<xsd:simpleContent>
+			<xsd:extension base="xsd:string">
+				<xsd:attribute type="xsd:string" name="name" use="required" />
+			</xsd:extension>
+		</xsd:simpleContent>
+	</xsd:complexType>
+
+	<xsd:complexType name="defaultParameter">
+		<xsd:attribute type="xsd:string" name="name" />
+	</xsd:complexType>
+
+	<xsd:complexType name="parameter" mixed="true">
+		<xsd:sequence>
+			<xsd:element type="xsd:string" name="parameter-value" minOccurs="0" maxOccurs="unbounded" />
+			<xsd:element type="xsd:string" name="start-value" minOccurs="0" maxOccurs="1" />
+			<xsd:element type="xsd:string" name="end-value" minOccurs="0" maxOccurs="1" />
+			<xsd:element type="xsd:string" name="step-value" minOccurs="0" maxOccurs="1" />
+		</xsd:sequence>
+		<xsd:attribute type="xsd:string" name="name" use="required" />
+		<xsd:attribute type="parameterType" name="parameter-type" default="constant" />
+		<xsd:attribute type="position" name="position" default="0" />
+	</xsd:complexType>
+
+	<xsd:complexType name="submodelParameter">
+		<xsd:sequence>
+			<xsd:element type="parameter" name="parameter" minOccurs="0" maxOccurs="unbounded">
+				<xsd:annotation>
+					<xsd:appinfo>
+						<jxb:property name="ParameterList" />
+					</xsd:appinfo>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element type="submodelParameter" name="submodel-parameter" minOccurs="0" maxOccurs="unbounded">
+				<xsd:annotation>
+					<xsd:appinfo>
+						<jxb:property name="SubmodelParameterList" />
+					</xsd:appinfo>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element type="gene" name="gene" minOccurs="0" maxOccurs="unbounded">
+				<xsd:annotation>
+					<xsd:appinfo>
+						<jxb:property name="GeneList" />
+					</xsd:appinfo>
+				</xsd:annotation>
+			</xsd:element>
+		</xsd:sequence>
+		<xsd:attribute type="xsd:string" name="name" use="required" />
+		<xsd:attribute type="xsd:string" name="type" use="required" />
+		<xsd:attribute type="position" name="position" default="0" />
+	</xsd:complexType>
+
+	<xsd:complexType name="combination">
+		<xsd:sequence>
+			<xsd:element type="parameter" name="parameter" minOccurs="0" maxOccurs="unbounded">
+				<xsd:annotation>
+					<xsd:appinfo>
+						<jxb:property name="ParameterList" />
+					</xsd:appinfo>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element type="submodelParameter" name="submodel-parameter" minOccurs="0" maxOccurs="unbounded">
+				<xsd:annotation>
+					<xsd:appinfo>
+						<jxb:property name="SubmodelParameterList" />
+					</xsd:appinfo>
+				</xsd:annotation>
+			</xsd:element>
+		</xsd:sequence>
+		<xsd:attribute type="position" name="position" use="required" />
+	</xsd:complexType>
+
+	<xsd:simpleType name="modelType">
+		<xsd:restriction base="xsd:string">
+			<xsd:enumeration value="single" />
+			<xsd:enumeration value="parameter-sweep" />
+			<xsd:enumeration value="ga" />
+		</xsd:restriction>
+	</xsd:simpleType>
+
+	<xsd:simpleType name="parameterType">
+		<xsd:restriction base="xsd:string">
+			<xsd:enumeration value="constant" />
+			<xsd:enumeration value="list" />
+			<xsd:enumeration value="increment" />
+		</xsd:restriction>
+	</xsd:simpleType>
+
+	<xsd:simpleType name="position">
+		<xsd:restriction base="xsd:integer">
+			<xsd:minInclusive value="0" />
+		</xsd:restriction>
+	</xsd:simpleType>
+	
+	<xsd:complexType name="selector">
+		<xsd:sequence>
+			<xsd:element type="property" name="property" minOccurs="0" maxOccurs="unbounded">
+				<xsd:annotation>
+					<xsd:appinfo>
+						<jxb:property name="selectorProperties" />
+					</xsd:appinfo>
+				</xsd:annotation>
+			</xsd:element>
+		</xsd:sequence>
+		<xsd:attribute type="xsd:string" name="type" use="required" />
+	</xsd:complexType>
+	
+	<xsd:complexType name="operator">
+		<xsd:sequence>
+			<xsd:element type="property" name="property" minOccurs="0" maxOccurs="unbounded">
+				<xsd:annotation>
+					<xsd:appinfo>
+						<jxb:property name="operatorProperties" />
+					</xsd:appinfo>
+				</xsd:annotation>
+			</xsd:element>
+		</xsd:sequence>
+		<xsd:attribute type="xsd:string" name="type" use="required" />
+	</xsd:complexType>
+	
+	<xsd:complexType name="property">
+		<xsd:simpleContent>
+			<xsd:extension base="xsd:string">
+				<xsd:attribute type="xsd:string" name="key" use="required" />
+			</xsd:extension>
+		</xsd:simpleContent>
+	</xsd:complexType>
+	
+	<xsd:complexType name="chromosome">
+		<xsd:sequence>
+			<xsd:element type="parameter" name="parameter" minOccurs="0" maxOccurs="unbounded">
+				<xsd:annotation>
+					<xsd:appinfo>
+						<jxb:property name="ParameterList" />
+					</xsd:appinfo>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element type="submodelParameter" name="submodel-parameter" minOccurs="0" maxOccurs="unbounded">
+				<xsd:annotation>
+					<xsd:appinfo>
+						<jxb:property name="SubmodelParameterList" />
+					</xsd:appinfo>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element type="gene" name="gene" minOccurs="0" maxOccurs="unbounded">
+				<xsd:annotation>
+					<xsd:appinfo>
+						<jxb:property name="GeneList" />
+					</xsd:appinfo>
+				</xsd:annotation>
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+	
+	<xsd:complexType name="gene">
+		<xsd:sequence>
+			<xsd:element type="xsd:string" name="gene-value" minOccurs="0" maxOccurs="unbounded">
+				<xsd:annotation>
+					<xsd:appinfo>
+						<jxb:property name="GeneValueList" />
+					</xsd:appinfo>
+				</xsd:annotation>
+			</xsd:element>
+		</xsd:sequence>
+		<xsd:attribute type="xsd:string" name="name" use="required" />
+		<xsd:attribute type="xsd:string" name="gene-type" use="required" />
+		<xsd:attribute type="xsd:decimal" name="min" use="optional" />
+		<xsd:attribute type="xsd:decimal" name="max" use="optional" />
+		<xsd:attribute type="xsd:boolean" name="integer" use="optional" />
+	</xsd:complexType>
+</xsd:schema>

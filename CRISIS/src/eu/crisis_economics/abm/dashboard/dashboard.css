@@ -1,0 +1,72 @@
+javax-swing-JPanel {
+	-swing-background: #FFFFFF;
+}
+
+#infoTextPane {
+	-swing-background: #0093C9;
+/*	-swing-background: #0F5C7B;*/
+	/*120, 58, 37*/
+}
+
+.pageTitle,.pageTitleArrow {
+	-swing-font: sansserif plain 30;
+}
+
+.pageTitle {
+	-swing-foreground: #D5D5D5;
+}
+
+.pageTitleArrow {
+	-swing-foreground: #FFFFFF;
+}
+
+.selectedTitle {
+	-swing-foreground: #FFFFFF;
+}
+
+#statusMessage {
+	-swing-border: emptyborder(10, 0, 10, 0);
+	-swing-font: dialog bold 13;
+}
+
+.commonPanel {
+	-swing-opaque: true;
+	-swing-background: #FFFFFF;
+}
+
+
+javax-swing-JScrollPane {
+	-swing-background: #0093C9;
+/*	-swing-border: null;*/
+}
+
+/*
+javax-swing-JViewport {
+	-swing-background: #0093C9;
+}
+*/
+
+javax-swing-JViewport {
+	-swing-opaque: false;
+	-swing-background: #0093C9;
+}
+
+.borderless {
+	-swing-border: null;
+}
+
+/*
+eu-crisis_economics-abm-dashboard-Dashboard {
+	-swing-opaque: false;
+}
+*/
+/*
+javax-swing-JMenuBar,javax-swing-JMenu,javax-swing-JMenuItem {
+	-swing-background: #0093C9;
+	-swing-opaque: true;
+}
+*/
+
+#breadcrumb javax-swing-JLabel {
+	-swing-font: dialog bold 13;
+}

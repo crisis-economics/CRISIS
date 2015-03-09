@@ -1,0 +1,25 @@
+CONTRIBUTORS
+
+The scientific code authors of CRISIS include:
+
+J. Kieran Phillips, Ross Richardson, Daniel Tang, Milan Lovric, Victor Spirin, Olaf Bochmann,
+Aurélien Vermeir, Bob De Caux, Marotta Luca, Sebastian Poledna, Christoph Aymanns,
+Anatolij Gelimson, Gérald Gurtner, Luke Friendshuh, Ermanno Catullo, Ariel Y. Hoffman, 
+Jakob Grazzini, Peter Klimek, James Porter, Alessandro Gobbi, Richard O. Legendi, Fabio Caccioli, 
+Fulvio Corsi, Tamás Máhr and Rajmund Bocsi.
+
+CRISIS in a European Commission FP7 project. The partners of the CRISIS project and the host
+institutions of the authors included:
+
+Università Cattolica del Sacro Cuore (UCSC), The Chancellor, Masters and Scholars of the 
+University of Oxford, Universiteit van Amsterdam (UvA), Centre de Recerca en Economia 
+Internacional (CREI), MedizinischeUniversitaet Wien (MUV), The City University (CITY)
+AITIA International, Inc. (AITIA), Università degli Studi di Palermo (UNIPA), Commisariat à 
+l'Energie Atomique et aux Energies Alternatives (CEA), Università Politecnica delle Marche 
+(UPM) and Scuola Normale Superiore di Pisa (SNS).
+
+Indirect contributors include:
+
+Balázs Bálint, Gábor Ferschl, Attila Szabó, László Gulyás, Zsolt Kúti, Gábor Szemes, 
+Balázs Adamcsek, Tibor Baranya, Viktor Erdélyi, Márton Ivány, Róbert Mészáros, Ervin Mikus
+and J. Doyne Farmer.

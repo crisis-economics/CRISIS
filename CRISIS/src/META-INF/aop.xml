@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE aspectj PUBLIC
+    "-//AspectJ//DTD//EN"
+    "http://www.eclispe.org/aspectj/dtd/aspectj.dtd">
+<aspectj>
+	<aspects>
+ 		<aspect name="eu.crisis_economics.abm.aspects.DataCollection" /> 
+<!-- 		<aspect name="eu.crisis_economics.abm.aspects.Recording" /> -->
+	</aspects>
+	
+<!--  	<weaver  options="-showWeaveInfo -verbose" > -->
+
+ 	<weaver  options="-warn:none" >
+ 		<exclude within="ai.aitia.meme.*" />
+ 		<exclude within="org.apache.*" />
+ 		<exclude within="sim.*" />
+ 		<exclude within="com.google.*" />
+ 		<exclude within="org.reflections.*" />
+	</weaver>
+</aspectj>

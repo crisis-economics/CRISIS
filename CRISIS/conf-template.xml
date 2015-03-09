@@ -1,0 +1,59 @@
+<!-- 
+ This file is part of CRISIS, an economics simulator.
+
+ Copyright (C) 2015 John Kieran Phillips
+
+ CRISIS is free software: you can redistribute it and/or modify
+ it under the terms of the GNU General Public License as published by
+ the Free Software Foundation, either version 3 of the License, or
+ (at your option) any later version.
+
+ CRISIS is distributed in the hope that it will be useful,
+ but WITHOUT ANY WARRANTY; without even the implied warranty of
+ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ GNU General Public License for more details.
+
+ You should have received a copy of the GNU General Public License
+ along with CRISIS.  If not, see <http://www.gnu.org/licenses/>.
+ -->
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model xmlns="http://crisis-economics.eu/model-configuration" run-strategy="parameter-sweep" class="eu.crisis_economics.abm.model.FinancialModelWithMacro">
+    <general-parameter name="Maximum number of time-steps">#MAX_SIMULATION_STEPS</general-parameter>
+    <general-parameter name="Start charting after time-step">1</general-parameter>
+    <default-parameter name="ConsumableGoodsDepreciationRate"/>
+    <default-parameter name="CreditRiskAffinity"/>
+    <default-parameter name="DecayableGoodsDepreciationRate"/>
+    <default-parameter name="EnableCentralBank"/>
+    <default-parameter name="ExternalIOTableDataFilename"/>
+    <default-parameter name="FirmGraceFactor"/>
+    <default-parameter name="FirmValuationFactor"/>
+    <default-parameter name="IONetworkType"/>
+    <default-parameter name="ImposeVarConstraintOnBanks"/>
+    <default-parameter name="InitialBankEquity"/>
+    <default-parameter name="InitialBankLeverage"/>
+    <default-parameter name="InitialCommercialLoanEquilibriumInterestRate"/>
+    <default-parameter name="InitialGoodsOwned"/>
+    <default-parameter name="InitialGoodsPrice"/>
+    <default-parameter name="InitialTargetProduction"/>
+    <default-parameter name="InitialWage"/>
+    <default-parameter name="MarketAdaptationRate"/>
+    <default-parameter name="NumberOfDurableGoodsTypes"/>
+    <default-parameter name="NumberOfFirmsPerSector"/>
+    <default-parameter name="NumberOfFundamentalistBanks"/>
+    <default-parameter name="NumberOfHouseholds"/>
+    <default-parameter name="NumberOfNoiseTraders"/>
+    <default-parameter name="NumberOfSectors"/>
+    <default-parameter name="NumberOfTrendfollowingBanks"/>
+    <default-parameter name="RecordingContracts"/>
+    <default-parameter name="Seed"/>
+    <default-parameter name="Setup"/>
+    <default-parameter name="TrendFollowerBankBeta"/>
+    <default-parameter name="TrendFollowerBankLag"/>
+    <combination position="1">
+        <parameter position="1" parameter-type="increment" name="#PARAMETER_NAME">
+            <start-value>#MIN_PARAMETER_VALUE</start-value>
+            <end-value>#MAX_PARAMETER_VALUE</end-value>
+            <step-value>#SAMPLING_INTERVAL</step-value>
+        </parameter>
+    </combination>
+</model>

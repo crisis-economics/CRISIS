@@ -1,0 +1,204 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 
+ This file is part of CRISIS, an economics simulator.
+
+ Copyright (C) 2015 John Kieran Phillips
+ Copyright (C) 2015 AITIA International, Inc.
+ Copyright (C) 2015 Daniel Tang
+
+ CRISIS is free software: you can redistribute it and/or modify
+ it under the terms of the GNU General Public License as published by
+ the Free Software Foundation, either version 3 of the License, or
+ (at your option) any later version.
+
+ CRISIS is distributed in the hope that it will be useful,
+ but WITHOUT ANY WARRANTY; without even the implied warranty of
+ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ GNU General Public License for more details.
+
+ You should have received a copy of the GNU General Public License
+ along with CRISIS.  If not, see <http://www.gnu.org/licenses/>.
+ -->
+<project name="interbank" default="jar">
+    <property name="src" location="src" />
+    <property name="src.test" location="test" />
+    <property name="lib" location="lib" />
+    <property name="bin" location="bin" />
+    <property name="bin.test" location="bin-test" />
+    <property name="bin.instr" location="bin-instrumented" />
+    <property name="doc" location="doc" />
+    <!-- This IS a value! Not a typo -->
+    <property name="javadoc.rel" value="javadoc" />
+    <property name="javadoc" location="doc/${javadoc.rel}" />
+    <property name="testng" location="doc/testng" />
+    <property name="dist" location="dist" />
+    <property name="dist.dashboard" location="${dist}/dashboard" />
+
+    <path id="cp">
+        <fileset dir="${lib}" includes="**/*.jar" />
+    </path>
+
+    <property name="javaVersion" value="1.6" />
+
+    <property name="version" value="2.0" />
+    <property name="javadocWindowTitle" value="Crisis-Mason Platform, v${version} - API Specification" />
+    <property name="javadocTitle" value="Crisis-Mason Platform, v${version}" />
+    <property name="javadocHeader" value="Crisis-Mason Platform&lt;br/&gt;Version ${version}" />
+    <property name="javadocDocTitle" value="Crisis-Mason Platform, v${version}&lt;br/&gt;API Specification" />
+
+    <taskdef name="testng" classname="org.testng.TestNGAntTask">
+        <classpath>
+            <!-- Self-contained -->
+            <pathelement location="lib/testng-6.7.jar" />
+        </classpath>
+    </taskdef>
+
+    <!-- Needs all the Jar files -->
+    <taskdef classpathref="cp" resource="tasks.properties" />
+
+    <target name="init">
+        <mkdir dir="${bin}" />
+        <mkdir dir="${bin.test}" />
+        <mkdir dir="${bin.instr}" />
+        <mkdir dir="${dist}" />
+        <mkdir dir="${dist.dashboard}" />
+        <mkdir dir="${doc}" />
+        <mkdir dir="${javadoc}" />
+        <mkdir dir="${testng}" />
+    </target>
+
+    <target name="compile" depends="init">
+        <javac includeantruntime="false" srcdir="${src}" destdir="${bin}" classpathref="cp" debug="on" source="${javaVersion}" target="${javaVersion}" />
+    </target>
+
+    <target name="instrument" depends="compile">
+    </target>
+
+    <target name="compile-test" depends="instrument">
+        <javac includeantruntime="false" srcdir="${src.test}" destdir="${bin.test}" debug="true" debuglevel="vars,lines,source" source="${javaVersion}" target="${javaVersion}">
+            <classpath>
+                <!-- Important: Keep order -->
+                <pathelement path="${bin.test}" />
+                <pathelement path="${bin}" />
+                <path refid="cp" />
+            </classpath>
+            <exclude name="src/crisis_economics/abm/submodel/*" />
+        </javac>
+    </target>
+
+    <target name="test" depends="compile-test">
+        <copy todir="${bin.test}">
+            <fileset dir="${src.test}" excludes="**/*.java" ></fileset>
+        </copy>
+        <testng outputdir="${testng}" haltOnFailure="true" verbose="10">
+            <classpath>
+                <pathelement path="${bin.instr}" />
+                <pathelement path="${bin}" />
+                <pathelement path="${bin.test}" />
+                <path refid="cp" />
+            </classpath>
+            <classfileset dir="${bin.test}" includes="**/*Test.class" excludes="eu/crisis_economics/abm/annotation/DataReportTest.class"/>
+<!--            <jvmarg value="-javaagent:lib/aspectjweaver.jar"/> -->
+        </testng>
+    </target>
+
+    <target name="doc">
+        <javadoc sourcepath="${src}" classpathref="cp" packagenames="*" destdir="${javadoc}" header="${javadocHeader}" overview="src/overview.html" doctitle="${javadocDocTitle}" public="true" windowtitle="${javadocWindowTitle}">
+            <!-- TODO header/footer/etc. -->
+            <footer>
+                Copyright &#169; 2012, Crisis Project Members, AITIA International, Inc. and/or its affiliates. All rights reserved.
+            </footer>
+            <bottom>
+                &lt;a href="mailto:crisis-support@crisis-economics.eu"&gt;Submit a bug or feature request&lt;/a&gt;.&lt;br/&gt;
+                For further API reference and developer documentation, see documentation at the
+                &lt;a href="http://www.crisis-economics.eu/"&gt;Crisis site&lt;/a&gt;.&lt;br/&gt;
+                That documentation contains more detailed, developer-targeted descriptions, with conceptual overviews, definitions of terms, workarounds,
+                and working code examples.
+            </bottom>
+            <excludepackage name="eu.crisis_economics.abm.submodel.economic"/>
+            <excludepackage name="eu.crisis_economics.abm.submodel.financial"/>
+        </javadoc>
+    </target>
+
+    <target name="jar" depends="compile, test, doc">
+        <jar jarfile="${dist}/${ant.project.name}-${version}.jar" basedir="${bin}">
+            <fileset dir="${doc}" defaultexcludes="true">
+                <include name="${javadoc.rel}/**"/>
+            </fileset>
+            <fileset dir="${src}" excludes="overview.html doc-files/**" />
+        </jar>
+    </target>
+    
+    <target name="dashboard" depends="compile">
+    	<manifestclasspath property="dashboard.classpath" jarfile="${dist.dashboard}/dashboard-${version}.jar">
+    		<classpath>
+    			<fileset dir="lib">
+    				<include name="*.jar"/>
+    				<include name="dashboard/*.jar"/>
+    				<include name="waterloo/*.jar"/>
+    				<exclude name="cluster/*.jar"/>
+    			</fileset>
+    			<pathelement path="${bin}"/>
+    		</classpath>
+    	</manifestclasspath>
+        <jar destfile="${dist.dashboard}/dashboard-${version}.jar">
+            <fileset dir="${bin}" includes="eu/crisis_economics/abm/dashboard/Dashboard*.class"/>
+            <manifest>
+                <attribute name="Built-By" value="${user.name}"/>
+                <attribute name="Main-Class" value="eu.crisis_economics.abm.dashboard.Dashboard"/>
+<!--                <attribute name="Class-Path" value="bin/ lib/javassist-3.16.1-GA.jar lib/aspectjweaver.jar lib/colt.jar lib/commons-math-2.2.jar lib/guava-11.0.2.jar lib/jakarta-oro-2.0.8.jar lib/jcommander-1.29.jar lib/log4j-1.2.9.jar lib/mason-all-16.0.0-RELEASE.jar lib/mason-recording.jar lib/reflections-0.9.9-RC1.jar lib/slf4j-api-1.7.5.jar lib/forms-1.0.7.jar lib/laf-plugin-7.2.1.jar lib/laf-widget-7.2.1.jar lib/MasonPlugin-16.jar lib/MEME-FormsUtils.jar lib/meme-result-data.jar lib/meme-wizard.jar lib/substance-7.2.1.jar lib/trident-7.2.1.jar lib/batik-anim.jar lib/batik-awt-util.jar lib/batik-bridge.jar lib/batik-codec.jar lib/batik-css.jar lib/batik-dom.jar lib/batik-ext.jar lib/batik-extension.jar lib/batik-gui-util.jar lib/batik-gvt.jar lib/batik-parser.jar lib/batik-rasterizer.jar lib/batik-script.jar lib/batik-slideshow.jar lib/batik-squiggle.jar lib/batik-svg-dom.jar lib/batik-svggen.jar lib/batik-svgpp.jar lib/batik-swing.jar lib/batik-transcoder.jar lib/batik-ttf2svg.jar lib/batik-util.jar lib/batik-xml.jar lib/batik.jar lib/groovy-all-2.1.2.jar lib/javaGeom-0.11.1.jar lib/kcl-waterloo-base.jar lib/kcl-waterloo-deploy.jar lib/kcl-waterloo-export.jar lib/kcl-waterloo-groovy.jar lib/kcl-waterloo-gui2.jar lib/kcl-waterloo-math.jar lib/kcl-waterloo-swingx.jar lib/kcl-waterloo-widget.jar lib/pdf-transcoder.jar lib/SwingExplorer.jar lib/swingx-common-1.6.5-1.jar lib/swingx-painters-1.6.5-1.jar lib/swingx-plaf-1.6.5-1.jar lib/waterlooPlot.jar lib/xml-apis-ext.jar lib/xml-apis.jar lib/javatuples-1.2.jar"/>
+-->
+            	<attribute name="Class-Path" value="${dashboard.classpath}"/>
+            </manifest>
+        </jar>
+        <copy todir="${dist.dashboard}/bin">
+            <fileset dir="${bin}" />
+        </copy>
+        <copy todir="${dist.dashboard}/lib" flatten="true">
+            <fileset dir="lib" />
+            <fileset dir="lib/dashboard" />
+            <fileset dir="lib/waterloo" />
+        </copy>
+    </target>
+
+    <target name="release" depends="clean, doc, jar">
+        <jar jarfile="${dist}/${ant.project.name}-${version}.jar" basedir="${bin}" />
+    </target>
+
+    <target name="clean">
+        <delete dir="${bin}" />
+        <delete dir="${bin.test}" />
+        <delete dir="${bin.instr}" />
+        <delete dir="${dist}" />
+        <delete dir="${doc}" />
+    </target>
+    
+
+    <target name="generate-model-configuration-classes">
+        <property name="jaxb.out.package" value="eu.crisis_economics.abm.dashboard.generated" />
+        <property name="jaxb.out.dir" value="${src}" />
+        <property name="jaxb.out.xsdfile" value="${src}/model-configuration.xsd" />
+        
+        <delete>
+            <fileset dir="${jaxb.out.dir}/eu/crisis_economics/abm/dashboard/generated" includes="**/*.java" />
+        </delete>
+        
+        <exec executable="xjc">
+        	<arg value="-target" />
+        	<arg value="2.1" />
+            <arg value="-p" />
+            <arg value="${jaxb.out.package}" />
+            <arg value="-d" />
+            <arg value="${jaxb.out.dir}" />
+            <arg value="${jaxb.out.xsdfile}" />
+        </exec>
+    </target>
+	
+	<target name="cluster-package">
+		<zip destfile="${dist}/${ant.project.name}-cluster.zip" >
+			<zipfileset dir="bin" prefix="${ant.project.name}/bin"/>
+			<zipfileset dir="lib" prefix="${ant.project.name}/lib"/>
+			<zipfileset dir="scripts" prefix="${ant.project.name}/scripts" filemode="755"/>
+		</zip>
+	</target>
+</project>
