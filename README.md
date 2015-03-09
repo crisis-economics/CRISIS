@@ -19,7 +19,33 @@ CRISIS aims to develop tools to deepen policymakers’ understanding of the econ
  * Analyses of critical EU financial and economic issues based on the model.
 
 The Project Coordinator for CRISIS is [Domenico Delli Gatti](http://docenti.unicatt.it/ita/domenico_delli_gatti/) (UCSC), Milan, Italy. 
-The Scientific Coordinator is [Doyne Farmer](http://www.oxfordmartin.ox.ac.uk/people/407) (UOXF), University of Oxford, UK. The Chief Engineer is [J. Kieran Phillips](https://www.maths.ox.ac.uk/people/kieran.phillips) (UOXF), University of Oxford, UK.
+The Scientific Coordinator is [Doyne Farmer](http://www.oxfordmartin.ox.ac.uk/people/407) (UOXF), University of Oxford, UK. The Chief Engineer is [J. Kieran Phillips](https://www.maths.ox.ac.uk/people/kieran.phillips) (UOXF), University of Oxford, UK. 
+
+The members of the CRISIS Advisory Board were:
+
+* Andrea Enria, Chairman, European Banking Authority
+* Diana Farrell, Director, McKinsey Center for Government, former Deputy Director of the National Economic Council, US White House
+* Andrew Haldane, Executive Director, Financial Stability, the Bank of England
+* Lex Hoogduin, Professor of Economics, University of Gronigen, former Board Member, Bank of the Netherlands
+* Paul Jenkins, Distinguished Fellow, Centre for International Governance Innovation, former Deputy-Governor, Bank of Canada
+* Mitchell Julis, Co-Chairman and co-CEO, Canyon Capital Advisers
+* Hans-Helmut Kotz, Visiting Professor, Harvard, former Executive Board Member for Financial Stability, Deutsche Bundesbank
+* Ewald Nowotny, Governor, National Bank of Austria
+* Gus (Lord) O’Donnell, Former Cabinet Secretary and former Permanent Treasury Secretary, British Government
+* Svein Harald Oygard Former Deputy Finance Minister, Norway, Former Governor Bank of Iceland
+* Simon Potter, Executive Vice President, Markets Group, Federal Reserve Bank of New York
+* George Soros, Chairman, Soros Fund Management
+* Coen Teulings, Director, Netherlands Bureau of Economic Policy Analysis
+* Jean-Claude Trichet Chairman of Bruegel and former President of the European Central Bank
+* William White, Chairman, Economic Development and Review Committee of the OECD, former Executive Committee
+* Member, Bank for International Settlements (BIS)
+* Michael Wilens  Vice Chairman, Fidelity
+
+Contact details:
+
+Email: info.crisis@crisis-economics.eu
+
+Tel +39 (0)2 7234 2483
 
 # Why is CRISIS needed?
 
