@@ -1,10 +1,8 @@
 # CRISIS
 
-The Complexity Research Initiative for Systemic InstabilitieS
+![A CRISIS Diagram](CRISIS/img/CRISIS-full.png)
 
-# What is CRISIS?
-
-CRISIS is the Complexity Research Initiative for Systemic Instabilities. It is a consortium of universities, private firms and policymakers that aims to build a new model of the economy and financial system that is based on how people and institutions actually behave.
+CRISIS is the Complexity Research Initiative for Systemic Instabilities, a consortium of universities, private firms and policymakers that aims to build a new model of the economy and financial system that is based on how people and institutions actually behave.
 
 It was set up in the wake of the global financial crisis that showed that existing models that had been adequate for the good times were utterly inadequate for predicting major crises.
 
